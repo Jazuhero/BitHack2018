@@ -12,6 +12,7 @@
 
 //using namespace bithack;
 namespace bithack {
+namespace myspace {
 std::mutex write_mtx;
 std::mutex level_mtx;
 
@@ -120,11 +121,12 @@ void MyLogger::setLevel(LogLevel level)
 	level_mtx.unlock();
 }
 
+} // namespace myspace
 } // namespace bithack
 
 bithack::ILogger* BitHackLogger::create()
 {
-	bithack::ILogger* logger = new bithack::MyLogger();
+	bithack::ILogger* logger = new bithack::myspace::MyLogger();
 	logger->setLevel(bithack::LOG_LEVEL_DEFAULT);
 	return logger;
 }
