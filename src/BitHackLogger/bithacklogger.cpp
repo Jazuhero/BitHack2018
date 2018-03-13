@@ -7,7 +7,8 @@
 #include <thread>
 #include <mutex>
 
-using namespace bithack;
+//using namespace bithack;
+namespace bithack {
 
 class MyLogger : public ILogger
 {
@@ -47,9 +48,13 @@ void MyLogger::setLevel(LogLevel level)
 	level_mtx.unlock();
 }
 
-ILogger* BitHackLogger::create()
+} // namespace bithack
+
+bithack::ILogger* BitHackLogger::create()
 {
-	ILogger* logger = new MyLogger();
-	logger->setLevel(LOG_LEVEL_DEFAULT);
+	bithack::ILogger* logger = new bithack::MyLogger();
+	logger->setLevel(bithack::LOG_LEVEL_DEFAULT);
 	return logger;
 }
+
+
