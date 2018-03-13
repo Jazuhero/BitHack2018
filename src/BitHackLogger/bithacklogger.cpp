@@ -97,7 +97,7 @@ void MyLogger::write(LogLevel level, const char* file, uint32_t line, const std:
 	// The tmp-folder must exist before this!!
 	std::fstream log;
 	log.open("tmp/debug.log", std::fstream::in | std::fstream::out | std::fstream::app);
-	log << logMsg;
+	log << logMsg << std::endl;
 	log.close();
 
 	write_mtx.unlock();
