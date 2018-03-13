@@ -66,7 +66,7 @@ void MyLogger::write(LogLevel level, const char* file, uint32_t line, const std:
 
 	std::cout << logMsg << std::endl;
 
-	auto time = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+	//auto time = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
 	//std::cerr << std::ctime(&time) << std::endl;
 
 	std::fstream log;
