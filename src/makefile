@@ -1,0 +1,8 @@
+NAME=bithack
+SOURCE=main.cpp logger.cpp tester.h BitHackLogger/bithacklogger.cpp
+
+all: 
+	g++ -Werror -Wall -std=c++11 $(SOURCE) -pthread -o $(NAME)
+
+clean:
+	rm -f $(NAME)
