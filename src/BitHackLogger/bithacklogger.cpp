@@ -30,7 +30,6 @@ void MyLogger::write(LogLevel level, const char* file, uint32_t line, const std:
 	if (level_ != LOG_LEVEL_DEFAULT and level_ <= level) {
 		return;
 	}
-	write_mtx.lock();
 
 	std::string logLevelStr;
 
@@ -48,6 +47,8 @@ void MyLogger::write(LogLevel level, const char* file, uint32_t line, const std:
 		default:
 		logLevelStr = "[DEFAULT]";
 	}
+
+	write_mtx.lock();
 
 	auto time = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
 	//std::cerr << std::ctime(&time) << std::endl;
@@ -86,6 +87,7 @@ void MyLogger::write(LogLevel level, const char* file, uint32_t line, const std:
 	//auto time = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
 	//std::cerr << std::ctime(&time) << std::endl;
 
+	// The tmp-folder must exist before this!!
 	std::fstream log;
 	log.open("tmp/debug.log", std::fstream::in | std::fstream::out | std::fstream::app);
 	log << logMsg;
