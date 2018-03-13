@@ -70,6 +70,7 @@ void MyLogger::write(LogLevel level, const char* file, uint32_t line, const std:
 	//auto time = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
 	//std::cerr << std::ctime(&time) << std::endl;
 
+	// The tmp-folder must exist before this!!
 	std::fstream log;
 	log.open("tmp/debug.log", std::fstream::in | std::fstream::out | std::fstream::app);
 	log << logMsg;
