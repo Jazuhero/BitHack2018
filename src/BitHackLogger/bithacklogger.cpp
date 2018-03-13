@@ -61,7 +61,16 @@ void MyLogger::write(LogLevel level, const char* file, uint32_t line, const std:
 	//logMsg = logMsg.substr(logMsg.size() - 1);
 	std::string logMsg = std::to_string(1900 + ltm->tm_year);
 	logMsg += "-";
-	logMsg += std::to_string(1 + ltm->tm_mon);
+	if (1 + ltm->tm_mon >= 10)
+	{
+		logMsg += std::to_string(1 + ltm->tm_mon);
+	}
+	else
+	{
+		logMsg += "0";
+		logMsg += std::to_string(1 + ltm->tm_mon);
+	}
+	//logMsg += std::to_string(1 + ltm->tm_mon);
 	logMsg += "-";
 	logMsg += std::to_string(ltm->tm_mday);
 	logMsg += " ";
@@ -69,7 +78,16 @@ void MyLogger::write(LogLevel level, const char* file, uint32_t line, const std:
 	logMsg += ":";
 	logMsg += std::to_string(1 + ltm->tm_min);
 	logMsg += ":";
-	logMsg += std::to_string(1 + ltm->tm_sec);
+	if (1 + ltm->tm_sec >= 10)
+	{
+		logMsg += std::to_string(1 + ltm->tm_sec);
+	}
+	else
+	{
+		logMsg += "0";
+		logMsg += std::to_string(1 + ltm->tm_sec);
+	}
+	//logMsg += std::to_string(1 + ltm->tm_sec);
 	logMsg += " ";
 	logMsg += file;
 	logMsg += " ";
