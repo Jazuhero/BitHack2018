@@ -2,6 +2,7 @@
 #define SRC_BITHACKLOGGER_BITHACKLOGGER_H_
 
 #include "../ilogger.h"
+#include "../loglevel.h"
 
 class BitHackLogger 
 {

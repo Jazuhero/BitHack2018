@@ -3,5 +3,5 @@
 
 static bithack::ILogger* create()
 {
-	
+	return nullptr;
 }
