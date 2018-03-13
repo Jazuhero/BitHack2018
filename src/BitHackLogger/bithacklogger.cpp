@@ -2,6 +2,7 @@
 #include "../loglevel.h"
 #include <chrono>
 #include <iostream>
+#include <fstream>
 #include <ctime>
 
 using namespace bithack;
@@ -20,6 +21,10 @@ void MyLogger::write(LogLevel level, const char* file, uint32_t line, const std:
 {
 	auto time = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
 	std::cerr << std::ctime(&time) << std::endl;
+	std::fstream log; // Tähän joku suojaus sitten kun ollaan rinnakkain :)
+	log.open("tmp/debug.log", std::fstream::in | std::fstream::out | std::fstream::app);
+	log << "tänne se mitä kirjoitetaan tiedostoon";
+	log.close();
 }
 
 void MyLogger::setLevel(LogLevel level)
