@@ -3,7 +3,8 @@
 
 #include "../ilogger.h"
 
-class BitHackLogger 
+
+class BitHackLogger
 {
 public:
 	static bithack::ILogger* create();

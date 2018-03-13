@@ -5,23 +5,24 @@ using namespace bithack;
 
 static ILogger* create()
 {
-	bithack::ILogger* logger = new bithack::ILogger;
+	bithack::ILogger* logger = new MyLogger;
 	logger->setLevel(0);
 	return logger;
 }
 
+class MyLogger : public ILogger
+{
+public:
+	virtual void write(LogLevel level, const char* file, uint32_t line, const std::string& text);
+	virtual void setLevel(LogLevel level);
+}
 
-ILogger::~ILogger()
+void MyLogger::write(LogLevel level, const char* file, uint32_t line, const std::string& text)
 {
 
 }
 
-void ILogger::write(LogLevel level, const char* file, uint32_t line, const std::string& text)
-{
-
-}
-
-void ILogger::setLevel(LogLevel level)
+void MyLogger::setLevel(LogLevel level)
 {
 
 }
