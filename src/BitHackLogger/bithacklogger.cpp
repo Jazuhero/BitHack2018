@@ -51,15 +51,9 @@ void MyLogger::write(LogLevel level, const char* file, uint32_t line, const std:
 	write_mtx.lock();
 
 	auto time = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
-	//std::cerr << std::ctime(&time) << std::endl;
 
-	//std::put_time(time, "%Y-%m-%d %X");
-	//std::time_t time_ = time(0);
 	std::tm *ltm = std::localtime(&time);
 
-	//std::string logMsg = std::ctime(&time);
-	//std::string logMsg = std::put_time(time, "%Y-%m-%d %X");
-	//logMsg = logMsg.substr(logMsg.size() - 1);
 	std::string logMsg = std::to_string(1900 + ltm->tm_year);
 	logMsg += "-";
 	if (1 + ltm->tm_mon >= 10)
@@ -71,7 +65,6 @@ void MyLogger::write(LogLevel level, const char* file, uint32_t line, const std:
 		logMsg += "0";
 		logMsg += std::to_string(1 + ltm->tm_mon);
 	}
-	//logMsg += std::to_string(1 + ltm->tm_mon);
 	logMsg += "-";
 	logMsg += std::to_string(ltm->tm_mday);
 	logMsg += " ";
@@ -88,7 +81,6 @@ void MyLogger::write(LogLevel level, const char* file, uint32_t line, const std:
 		logMsg += "0";
 		logMsg += std::to_string(1 + ltm->tm_sec);
 	}
-	//logMsg += std::to_string(1 + ltm->tm_sec);
 	logMsg += " ";
 	logMsg += file;
 	logMsg += " ";
@@ -101,9 +93,6 @@ void MyLogger::write(LogLevel level, const char* file, uint32_t line, const std:
 	logMsg.erase(std::remove(logMsg.begin(), logMsg.end(), '\n'), logMsg.end());
 
 	std::cout << logMsg << std::endl;
-
-	//auto time = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
-	//std::cerr << std::ctime(&time) << std::endl;
 
 	// The tmp-folder must exist before this!!
 	std::fstream log;
