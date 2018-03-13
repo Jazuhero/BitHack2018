@@ -1,5 +1,8 @@
 #include "bithacklogger.h"
 #include "../loglevel.h"
+#include <chrono>
+#include <iostream>
+#include <ctime>
 
 using namespace bithack;
 
@@ -12,7 +15,8 @@ public:
 
 void MyLogger::write(LogLevel level, const char* file, uint32_t line, const std::string& text)
 {
-
+	auto time = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+	std::cerr << std::ctime(&time) << std::endl;
 }
 
 void MyLogger::setLevel(LogLevel level)
