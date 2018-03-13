@@ -19,6 +19,10 @@ private:
 
 void MyLogger::write(LogLevel level, const char* file, uint32_t line, const std::string& text)
 {
+	if (level_ != LOG_LEVEL_DEFAULT and level_ != level) {
+		return;
+	}
+
 	auto time = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
 	std::cerr << std::ctime(&time) << std::endl;
 	std::fstream log; // Tähän joku suojaus sitten kun ollaan rinnakkain :)
