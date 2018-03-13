@@ -12,6 +12,8 @@
 
 //using namespace bithack;
 namespace bithack {
+std::mutex write_mtx;
+std::mutex level_mtx;
 
 class MyLogger : public ILogger
 {
@@ -20,9 +22,6 @@ public:
 	virtual void setLevel(LogLevel level);
 private:
 	LogLevel level_;
-	std::mutex write_mtx;
-	std::mutex level_mtx;
-
 };
 
 void MyLogger::write(LogLevel level, const char* file, uint32_t line, const std::string& text)
