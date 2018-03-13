@@ -6,6 +6,7 @@
 #include <ctime>
 #include <algorithm>
 #include <iostream>
+#include <iomanip>
 #include <thread>
 #include <mutex>
 
@@ -26,7 +27,7 @@ private:
 
 void MyLogger::write(LogLevel level, const char* file, uint32_t line, const std::string& text)
 {
-	if (level_ != LOG_LEVEL_DEFAULT and level_ != level) {
+	if (level_ != LOG_LEVEL_DEFAULT and level_ <= level) {
 		return;
 	}
 	write_mtx.lock();
@@ -51,8 +52,24 @@ void MyLogger::write(LogLevel level, const char* file, uint32_t line, const std:
 	auto time = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
 	//std::cerr << std::ctime(&time) << std::endl;
 
-	std::string logMsg = std::ctime(&time);
+	//std::put_time(time, "%Y-%m-%d %X");
+	//std::time_t time_ = time(0);
+	std::tm *ltm = std::localtime(&time);
+
+	//std::string logMsg = std::ctime(&time);
+	//std::string logMsg = std::put_time(time, "%Y-%m-%d %X");
 	//logMsg = logMsg.substr(logMsg.size() - 1);
+	std::string logMsg = std::to_string(1900 + ltm->tm_year);
+	logMsg += "-";
+	logMsg += std::to_string(1 + ltm->tm_mon);
+	logMsg += "-";
+	logMsg += std::to_string(ltm->tm_mday);
+	logMsg += " ";
+	logMsg += std::to_string(ltm->tm_hour);
+	logMsg += ":";
+	logMsg += std::to_string(1 + ltm->tm_min);
+	logMsg += ":";
+	logMsg += std::to_string(1 + ltm->tm_sec);
 	logMsg += " ";
 	logMsg += file;
 	logMsg += " ";
