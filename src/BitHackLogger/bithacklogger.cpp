@@ -3,5 +3,6 @@
 
 static bithack::ILogger* create()
 {
-	return nullptr;
+	bithack::ILogger* logger = new bithack::ILogger;
+	return logger;
 }
