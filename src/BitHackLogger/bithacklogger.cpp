@@ -29,7 +29,6 @@ void MyLogger::write(LogLevel level, const char* file, uint32_t line, const std:
 	if (level_ != LOG_LEVEL_DEFAULT and level_ != level) {
 		return;
 	}
-	write_mtx.lock();
 
 	std::string logLevelStr;
 
@@ -47,6 +46,8 @@ void MyLogger::write(LogLevel level, const char* file, uint32_t line, const std:
 		default:
 		logLevelStr = "[DEFAULT]";
 	}
+
+	write_mtx.lock();
 
 	auto time = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
 	//std::cerr << std::ctime(&time) << std::endl;
